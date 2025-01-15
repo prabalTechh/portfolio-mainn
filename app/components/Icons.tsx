@@ -1,0 +1,41 @@
+import {
+  FaNodeJs,
+  FaReact,
+  FaGithub,
+  FaHtml5,
+  FaCss3Alt,
+  FaJava,
+} from "react-icons/fa";
+import {
+  SiJavascript,
+  SiExpress,
+  SiSolidity,
+  SiNextdotjs,
+  SiTailwindcss,
+  SiAdp,
+  SiRsocket,
+  SiMongodb,
+  SiPrisma,
+  SiSelenium,
+  SiPresto,
+} from "react-icons/si";
+
+export const IconSet = {
+  JavaScript: SiJavascript,
+  HTML: FaHtml5,
+  CSS: FaCss3Alt,
+  NodeJS: FaNodeJs,
+  ExpressJS: SiExpress,
+  Java: FaJava,
+  Solidity: SiSolidity,
+  ReactJS: FaReact,
+  NextJS: SiNextdotjs,
+  TailwindCSS: SiTailwindcss,
+  API: SiAdp,
+  WebSockets: SiRsocket,
+  MongoDB: SiMongodb,
+  PreSQL: SiPresto,
+  Prisma: SiPrisma,
+  Selenium: SiSelenium,
+  GitHub: FaGithub,
+};
