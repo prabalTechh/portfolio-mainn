@@ -7,16 +7,17 @@ import {
 } from "@/components/ui/tooltip";
 
 interface ButtonProps {
-  children: ReactElement;
+  children?: ReactElement | String;
   content: string;
+  clsname?: string;
 }
 
-export async function Button({ children, content }: ButtonProps) {
+export async function Button({ children, content , clsname }: ButtonProps) {
   return (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger>
-          <div className="px-4 rounded-xl py-2 bg-[#22333C] border border-[#5D513F] text-white">
+          <div className={`px-4 rounded-xl py-2 bg-[#22333C] dark:bg-[#B55629] border border-[#5D513F] dark:border-[#22333C] text-white dark:text-[#fafafa]` + clsname}>
             {children}
           </div>
         </TooltipTrigger>

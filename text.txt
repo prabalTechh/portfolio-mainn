@@ -1,37 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport"
-   content="width=device-width, 
-   initial-scale=1.0" />
-  <title>Document</title>
-  <a 
-href="https://github.com/prabalTechh">
-   github
-  </a>
-  <a 
-href="https://github.com/naagmani">
-   github
-  </a>
-  <a 
-href="https://github.com/chintamani">
-   chintamani
-  </a>
-  <a 
-href="https://github.com/chintamani">
-   chintamani
-  </a>
-  <a 
-href="https://github.com/chintamani">
-   chintamani
-  </a>
-  <a 
-href="https://github.com/chintamani">
-   chintamani
-  </a>
+    <meta charset="UTF-8" />
+    <meta name="viewport" 
+      content="width=device-width, 
+      initial-scale=1.0" />
+    <title>Projects</title>
 </head>
 <body>
-  
+    <nav>
+        <a 
+=>         href="https://github.com/prabalTechh">
+            github
+        </a>
+        <a 
+=>          href="https://github.com/naagmani">
+            github
+        </a>
+        <a 
+=>          href="https://github.com/chintamani">
+            chintamani
+        </a>
+        <a 
+=>          href="https://github.com/chintamani">
+            chintamani
+        </a>
+        <a 
+=>          href="https://github.com/chintamani">
+            chintamani
+        </a>
+        <a 
+=>          href="https://github.com/chintamani">
+            chintamani
+        </a>
+    </nav>
 </body>
 </html>

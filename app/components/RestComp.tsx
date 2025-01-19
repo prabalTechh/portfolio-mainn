@@ -1,8 +1,9 @@
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaExternalLinkSquareAlt, FaGithub, FaLinkedin } from "react-icons/fa";
 import { PiCodesandboxLogoDuotone } from "react-icons/pi";
 import { Button } from "./Button";
 import { IconSet } from "./Icons";
 import styles from "../fonts/Home.module.css";
+import { FaExternalLinkAlt } from "react-icons/fa";
 export function RestComp() {
   return (
     <div className="flex flex-col items-center justify-center gap-2">
@@ -20,13 +21,21 @@ export function RestComp() {
           </li>
         </ul>
         <div className="flex  items-center justify-center text-center  pl-2">
-          <span className={`text-sm  p-2 ${styles["albert-sans"]}`} >github</span>|{" "}
-          <span className={`text-sm p-2  ${styles["albert-sans"]}`}>linkedin</span>|
-          <span className={`text-sm p-2  ${styles["albert-sans"]}`}>leetCode</span>
+          <span className={`text-sm  p-2 ${styles["albert-sans"]}`}>
+            github
+          </span>
+          |{" "}
+          <span className={`text-sm p-2  ${styles["albert-sans"]}`}>
+            linkedin
+          </span>
+          |
+          <span className={`text-sm p-2  ${styles["albert-sans"]}`}>
+            leetCode
+          </span>
         </div>
       </div>
       <span className="px-4 py-2 m-2 shadow rounded-md shadow-[#5D513F]  ">
-        <p className={`text-sm ${styles["ibm-plex"]}`} >
+        <p className={`text-sm ${styles["ibm-plex"]}`}>
           Builds dynamic frontends and scalable backends , integrating modern
           frameworks and Api's Delivers complete high-performance web-solution
         </p>
@@ -81,9 +90,15 @@ export function RestComp() {
           <IconSet.GitHub />
         </Button>
       </div>
-      <div className="p-2 border border-gray-400 text-sm ">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit
-        officia dolores porro!
+      <div className="p-4 flex rounded-xl gap-2 items-center justify-center text-sm ">
+        <p className={`text-base } ${styles[styles.jomolhari]}`} >
+          {" "}
+          Contact me
+        
+        </p>
+        <Button content="Contact me" clsname=" dark:bg-transparent dark:border-0 text-white">
+            <FaExternalLinkAlt />
+          </Button>
       </div>
     </div>
   );

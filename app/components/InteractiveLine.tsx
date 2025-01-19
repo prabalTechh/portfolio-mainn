@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface LineData {
   text: string;
@@ -18,7 +18,6 @@ const InteractiveLine: React.FC<InteractiveLineProps> = ({
   index,
 }) => {
   const [tooltipVisible, setTooltipVisible] = useState(false);
-  const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text).then(() => {
@@ -26,21 +25,29 @@ const InteractiveLine: React.FC<InteractiveLineProps> = ({
     });
   };
 
-  const handleMouseEnter = () => {
-    if (timer) clearTimeout(timer); // Clear any previous timeout when mouse enters
-    setTooltipVisible(true);
+  const handleTooltipToggle = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent event bubbling
+    setTooltipVisible(!tooltipVisible);
   };
 
-  const handleMouseLeave = () => {
-    const timeout = setTimeout(() => {
+  // Close tooltip when clicking outside
+  const handleClickOutside = () => {
+    if (tooltipVisible) {
       setTooltipVisible(false);
-    }, 1000); // Tooltip disappears after 5 seconds
-    setTimer(timeout);
+    }
   };
+
+  // Add event listener for clicking outside
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [tooltipVisible]);
 
   return (
-    <div key={index} className="flex gap-3 relative group">
-      <span className="text-gray-400">{index}</span>
+    <div className="flex gap-3 relative group py-1">
+      <span className="text-gray-400 min-w-[24px] text-right">{index}</span>
       {lineData.tagName ? (
         <span>
           {lineData.text.split(lineData.tagName).map((part, i) => (
@@ -53,46 +60,57 @@ const InteractiveLine: React.FC<InteractiveLineProps> = ({
           ))}
         </span>
       ) : lineData.text.includes("http") ? (
-        <span
-          className="text-[#78ccf4] underline cursor-pointer relative"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
-          {lineData.text}
-          {/* Tooltip with Copy URL */}
+        <div className="relative">
+          <span
+            className=" text-[#78ccf4] text-base underline cursor-pointer"
+            onClick={handleTooltipToggle}
+          >
+            {lineData.text}
+          </span>
           {tooltipVisible && (
-            <div className="absolute left-40 bottom-full mb-2 bg-[#22333C] text-white p-4  flex items-center flex-col gap-2 rounded-3xl shadow-lg">
-              <div>
-                <Image src={"/user.png"} alt={""} width={272} height={264} />
-              </div>
-              <div className="text-xs pt-2">{lineData.text}</div>
-              <div className="flex gap-2  justify-end">
-                <button
-                  onClick={() => {
-                    const startIdx = lineData.text.indexOf('href="') + 6;
-                    const endIdx = lineData.text.indexOf('"', startIdx);
-                    const url = lineData.text.substring(startIdx, endIdx);
-                    copyToClipboard(url);
-                  }}
-                  className="mt-2 bg-[#78ccf4] text-black px-2 py-1 rounded hover:bg-[#5ba9d1]"
-                >
-                  Copy URL
-                </button>
-                <button
-                  onClick={() => {
-                    const startIdx = lineData.text.indexOf('href="') + 6;
-                    const endIdx = lineData.text.indexOf('"', startIdx);
-                    const url = lineData.text.substring(startIdx, endIdx);
-                    console.log(url);
-                  }}
-                  className="mt-2 bg-[#78ccf4] text-black px-2 py-1 rounded hover:bg-[#5ba9d1]"
-                >
-                  Open
-                </button>
+            <div className="absolute left-40 bottom-full mt-2 bg-[#1a2630] border border-[#2a3844] text-white rounded-lg shadow-xl z-50 w-[280px]">
+              <div className="p-4 space-y-3">
+                <div className="relative w-full h-48">
+                  <Image
+                    src="/user.png"
+                    alt=""
+                    fill
+                    className="object-cover rounded-md"
+                  />
+                </div>
+                <div className="text-sm text-gray-300 break-all">
+                  {lineData.text}
+                </div>
+                <div className="flex gap-2 justify-end pt-2">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      const startIdx = lineData.text.indexOf('href="') + 6;
+                      const endIdx = lineData.text.indexOf('"', startIdx);
+                      const url = lineData.text.substring(startIdx, endIdx);
+                      copyToClipboard(url);
+                    }}
+                    className="bg-[#78ccf4] text-black px-3 py-1.5 rounded-md text-sm font-medium hover:bg-[#5ba9d1] transition-colors"
+                  >
+                    Copy URL
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      const startIdx = lineData.text.indexOf('href="') + 6;
+                      const endIdx = lineData.text.indexOf('"', startIdx);
+                      const url = lineData.text.substring(startIdx, endIdx);
+                      window.open(url, "_blank");
+                    }}
+                    className="bg-[#78ccf4] text-black px-3 py-1.5 rounded-md text-sm font-medium hover:bg-[#5ba9d1] transition-colors"
+                  >
+                    Open
+                  </button>
+                </div>
               </div>
             </div>
           )}
-        </span>
+        </div>
       ) : (
         <span className="text-[#d8dae0] text-sm">{lineData.text}</span>
       )}
